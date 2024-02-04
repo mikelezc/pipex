@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 17:33:48 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/04 11:44:55 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/04 12:05:45 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
 			@echo -e -n "$(WHITE)]$(DEF_COLOR)"
-			@$(ECHO) "$(GREEN) => OK! 🔥🔥🔥$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK! 🎉​$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 			@echo -e -n "$(WHITE)=$(DEF_COLOR)"
@@ -110,11 +110,11 @@ $(OBJF):
 clean:
 			@$(RM) -r $(OBJ_DIR)
 			@$(RM) $(OBJF)
-			@echo -e -n "$(RED)[LIBFT]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🧹🧼✨$(DEF_COLOR)\n"
+			@echo -e -n "$(RED)[LIBFT]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@echo -e -n "$(RED)[LIBFT]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🧹🧼✨$(DEF_COLOR)\n"
+			@echo -e -n "$(RED)[LIBFT]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 
 re:			fclean all
 			@echo -e -n "$(GREEN)Cleaned and rebuilt everything for libft!$(DEF_COLOR)\n"
