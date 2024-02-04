@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/04 11:44:42 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/04 12:27:15 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM			= rm -f
 ECHO		= echo -e
 
 #output
-NAME		= push_swap
+NAME		= pipex
 
 #directories
 SRC_DIR		= src/
@@ -48,21 +48,24 @@ CYAN		=	\033[0;96m
 WHITE		=	\033[0;97m
 
 #src directories
-PSW_DIR		=	push_swap/
-MOV_DIR		=	movements/
+PIP_DIR		=	pipex/
+BONUS_DIR	=	bonus/
 
 #src files
-MAND_FILES	=	push_swap sort sort_big sort_big_utils check check_utils
-MOV_FILES	=	swap_moves rotation_moves rev_rot_moves push_moves
+PIP_FILES	=	pipex utils
+BONUS_FILES	=	
 
-SRC_FILES	=	$(addprefix $(PSW_DIR), $(MAND_FILES))
-COM_FILES	=	$(addprefix $(MOV_DIR), $(MOV_FILES))
+SRC_FILES	=	$(addprefix $(PIP_DIR), $(PIP_FILES))
+SRC_BFILES	=	$(addprefix $(BONUS_DIR), $(BONUS_FILES))
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 COMMON 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(COM_FILES)))
 COBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(COM_FILES)))
+
+BSRC		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_BFILES)))
+BOBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_BFILES)))
 
 OBJF		=	.cache_exists
 
@@ -75,12 +78,12 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ) $(COBJ) $(OBJF)
 			@$(ECHO) -n "$(WHITE)]$(DEF_COLOR)"
-			@$(ECHO) -n "$(GREEN) => OK! 🔥🔥🔥$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(GREEN) => OK! 🎉​$(DEF_COLOR)\n"
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
 			@$(ECHO) -n "$(GREEN)[$(NAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(OBJ) $(COBJ) $(HEADER) libft.a -o $(NAME)
-			@$(ECHO) "$(GREEN) => OK! 🔥🔥🔥$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK! 🎉​$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
 			@$(ECHO) -n "$(DEF_COLOR)=$(DEF_COLOR)"
@@ -88,15 +91,14 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
-			@mkdir -p $(OBJ_DIR)$(PSW_DIR)
-			@mkdir -p $(OBJ_DIR)$(MOV_DIR)
+			@mkdir -p $(OBJ_DIR)$(PIP_DIR)
 			@mkdir -p $(OBJ_DIR)$(BONUS_DIR)
 			@touch $(OBJF)
 
 clean:
 			@$(RM) -r $(OBJ_DIR)
 			@make clean -C $(LIBFT)
-			@$(ECHO) -n "$(RED)[push_swap]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🧹🧼✨$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(RED)[push_swap]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 			@$(RM) $(OBJF)
 
 fclean:		clean
@@ -106,11 +108,27 @@ fclean:		clean
 			@$(RM) $(LIBFT)/libft.a
 			@rm -rf *.dSYM
 			@find . -name ".DS_Store" -delete
-			@$(ECHO) -n "$(RED)[LIBFT]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🧹🧼✨$(DEF_COLOR)\n"
-			@$(ECHO) -n "$(RED)[push_swap]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🧹🧼✨$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(RED)[LIBFT]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(RED)[push_swap]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 
 
 re:			fclean all
 			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [push_swap]!🙌🙌🙌$(DEF_COLOR)\n"
+
+			bonus:
+			@$(ECHO) -n "$(YELLOW)[Dependencies]:\t$(DEF_COLOR)"
+			@$(ECHO) -n "$(RED)[$(DEF_COLOR)"
+			@make allbonus
+
+allbonus:		$(BNAME)
+
+$(BNAME):	$(BOBJ) $(COBJ)
+			@$(ECHO) -n "$(RED)]$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN) => OK! 🎉$(DEF_COLOR)\n"
+			@make -C $(LIBFT)
+			@cp libft/libft.a .
+			@$(ECHO) -n "$(YELLOW)[$(BNAME)]:\t$(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(BSRC) $(COMMON) $(HEADER) libft.a -o $(BNAME)
+			@$(ECHO) "$(GREEN) => OK! 🎉$(DEF_COLOR)"
 
 .PHONY:		all clean fclean re
