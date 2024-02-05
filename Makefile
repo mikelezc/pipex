@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/04 12:27:15 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/05 21:16:07 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ ECHO		= echo -e
 
 #output
 NAME		= pipex
+BNAME		= pipex_bonus
 
 #directories
 SRC_DIR		= src/
@@ -28,12 +29,8 @@ OBJ_DIR		= obj/
 
 #include
 INC			= inc
-BNAME		= checker
 HEADER		= -I inc
 LIBFT		= libft
-
-
-FSANITIZE	= -fsanitize=address -g3
 
 #colors
 DEF_COLOR	=	\033[0;39m
@@ -78,12 +75,12 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ) $(COBJ) $(OBJF)
 			@$(ECHO) -n "$(WHITE)]$(DEF_COLOR)"
-			@$(ECHO) -n "$(GREEN) => OK! 🎉​$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(GREEN) => OK! $(DEF_COLOR)\n"
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
 			@$(ECHO) -n "$(GREEN)[$(NAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(OBJ) $(COBJ) $(HEADER) libft.a -o $(NAME)
-			@$(ECHO) "$(GREEN) => OK! 🎉​$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK!​$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
 			@$(ECHO) -n "$(DEF_COLOR)=$(DEF_COLOR)"
@@ -124,11 +121,11 @@ allbonus:		$(BNAME)
 
 $(BNAME):	$(BOBJ) $(COBJ)
 			@$(ECHO) -n "$(RED)]$(DEF_COLOR)"
-			@$(ECHO) -n "$(GREEN) => OK! 🎉$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(GREEN) => OK!$(DEF_COLOR)\n"
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
 			@$(ECHO) -n "$(YELLOW)[$(BNAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(BSRC) $(COMMON) $(HEADER) libft.a -o $(BNAME)
-			@$(ECHO) "$(GREEN) => OK! 🎉$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK!$(DEF_COLOR)"
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus

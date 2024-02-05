@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 17:33:48 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/04 12:05:45 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/05 21:11:22 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
 			@echo -e -n "$(WHITE)]$(DEF_COLOR)"
-			@$(ECHO) "$(GREEN) => OK! 🎉​$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK!​$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 			@echo -e -n "$(WHITE)=$(DEF_COLOR)"
