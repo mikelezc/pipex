@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/05 21:48:09 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/05 22:29:14 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 # include "../libft/inc/get_next_line.h"
 
 //error message macros
-# define ARGC "\033Error: incorrect number of arguments\n\033[0m"
-# define CMD "\033[31mError: Command\n\033[0m"
-# define EXECVE "\033[31mError: Command\n\033[0m"
-# define FORK "\033[31mError: Fork\n\033[0m"
-# define INFILE "\033[31mError: Infile\n\033[0m"
-# define OUTFILE "\033[31mError: Outfile\n\033[0m"
-# define PIPE "\033[31mError: Pipe\n\033[0m"
+# define ARGC "Error: incorrect number of arguments\n"
+# define CMD "Command Error\n"
+# define EXECVE "Execve Error\n"
+# define FORK "Fork Error\n"
+# define INFILE "Infile Error\n"
+# define OUTFILE "Outfile Error\n"
+# define PIPE "Pipe Error\n"
 
+//storage structure
 typedef struct s_ppx
 {
 	int		infile;
@@ -43,13 +45,11 @@ typedef struct s_ppx
 }	t_ppx;
 
 //pipex (main)
-
 void	child1(t_ppx ppx, char **argv, char **envp);
 void	child2(t_ppx ppx, char **argv, char **envp);
 void	exec_children(t_ppx ppx, char *argv[], char *envp[]);
 
 //utils
-
 char	*get_path(char **envp);
 char	*get_command(char **env_paths, char *cmd);
 void	free_parent(t_ppx *ppx);
