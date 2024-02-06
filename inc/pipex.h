@@ -6,12 +6,14 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/05 22:29:14 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:50:26 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+//libraries
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,19 +24,19 @@
 # include "../libft/inc/get_next_line.h"
 
 //error message macros
-# define ARGC "Error: incorrect number of arguments\n"
-# define CMD "Command Error\n"
-# define EXECVE "Execve Error\n"
-# define FORK "Fork Error\n"
-# define INFILE "Infile Error\n"
-# define OUTFILE "Outfile Error\n"
-# define PIPE "Pipe Error\n"
+# define ERROR_ARG "Error: incorrect number of arguments\n"
+# define ERROR_CMD "Command Error\n"
+# define ERROR_EXE "Execve Error\n"
+# define ERROR_FRK "Fork Error\n"
+# define ERROR_INF "Infile Error\n"
+# define ERROR_OUT "Outfile Error\n"
+# define ERROR_PIP "Pipe Error\n"
 
 //storage structure
 typedef struct s_ppx
 {
-	int		infile;
-	int		outfile;
+	int		infile_fd;
+	int		outfile_fd;
 	int		end[2];
 	char	*path;
 	char	**cmd_paths;

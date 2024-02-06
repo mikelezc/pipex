@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/05 21:34:12 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:21:42 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	free_parent(t_ppx *ppx)
 	int	i;
 
 	i = 0;
-	close(ppx->infile);
-	close(ppx->outfile);
+	close(ppx->infile_fd);
+	close(ppx->outfile_fd);
 	while (ppx->cmd_paths[i])
 	{
 		free(ppx->cmd_paths[i]);
