@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/06 12:50:26 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:54:01 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ typedef struct s_ppx
 {
 	int		infile_fd;
 	int		outfile_fd;
-	int		end[2];
-	char	*path;
-	char	**cmd_paths;
-	pid_t	pid1;
-	pid_t	pid2;
+	int		pipe_fd[2];
+	char	*raw_cmd_paths;
+	char	**cut_cmd_paths;
+	pid_t	child_1_pid;
+	pid_t	child_2_pid;
 	char	**cmd_args;
 	char	*cmd;
 }	t_ppx;
 
 //pipex (main)
-void	child1(t_ppx ppx, char **argv, char **envp);
-void	child2(t_ppx ppx, char **argv, char **envp);
-void	exec_children(t_ppx ppx, char *argv[], char *envp[]);
+void	ppx_child_1(t_ppx ppx, char **argv, char **envp);
+void	ppx_child_2(t_ppx ppx, char **argv, char **envp);
+void	ppx_children_birth(t_ppx ppx, char *argv[], char *envp[]);
 
 //utils
-char	*get_path(char **envp);
+char	*ppx_search_paths(char **envp);
 char	*get_command(char **env_paths, char *cmd);
 void	free_parent(t_ppx *ppx);
 void	close_ends(t_ppx *ppx);
-void	ppx_error(char *err);
+void	ppx_exit_error(char *err);
 
 #endif

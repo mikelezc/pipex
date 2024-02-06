@@ -6,13 +6,13 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/06 12:21:42 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:40:04 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-char	*get_path(char **envp)
+char	*ppx_search_paths(char **envp)
 {
 	int	i;
 
@@ -47,21 +47,21 @@ void	free_parent(t_ppx *ppx)
 	i = 0;
 	close(ppx->infile_fd);
 	close(ppx->outfile_fd);
-	while (ppx->cmd_paths[i])
+	while (ppx->cut_cmd_paths[i])
 	{
-		free(ppx->cmd_paths[i]);
+		free(ppx->cut_cmd_paths[i]);
 		i++;
 	}
-	free(ppx->cmd_paths);
+	free(ppx->cut_cmd_paths);
 }
 
 void	close_ends(t_ppx *ppx)
 {
-	close(ppx->end[1]);
-	close(ppx->end[0]);
+	close(ppx->pipe_fd[1]);
+	close(ppx->pipe_fd[0]);
 }
 
-void	ppx_error(char *err)
+void	ppx_exit_error(char *err)
 {
 	perror(err);
 	exit(EXIT_FAILURE);
