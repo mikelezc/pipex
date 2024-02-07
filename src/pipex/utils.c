@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/07 13:18:33 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:13:04 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ char	*ppx_search_paths(char **envp)
 	int	i;
 
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5))
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (envp[i] + 5);
 		i++;
-	return (envp[i] + 5);
+	}
+	return (NULL);
 }
 
 char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname)

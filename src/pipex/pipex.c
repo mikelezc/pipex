@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/07 13:17:19 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:42:05 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
 	}
-	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) == -1)
+	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) <= -1)
 		ppx_exit_error(ERROR_EXE);
 }
 
@@ -52,19 +52,19 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
 	}
-	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) == -1)
+	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) <= -1)
 		ppx_exit_error(ERROR_EXE);
 }
 
-void	ppx_children_birth(t_ppx ppx, char *argv[], char *envp[])
+void	ppx_separated_at_birth(t_ppx ppx, char *argv[], char *envp[])
 {
 	ppx.child_1_pid = fork();
-	if (ppx.child_1_pid < 0)
+	if (ppx.child_1_pid <= -1)
 		ppx_exit_error(ERROR_FRK);
 	else if (ppx.child_1_pid == 0)
 		ppx_child_1(ppx, argv, envp);
 	ppx.child_2_pid = fork();
-	if (ppx.child_2_pid < 0)
+	if (ppx.child_2_pid <= -1)
 		ppx_exit_error(ERROR_FRK);
 	else if (ppx.child_2_pid == 0)
 		ppx_child_2(ppx, argv, envp);
@@ -74,25 +74,22 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_ppx	ppx;
 
-	if (argc == 5)
-	{
-		ppx.infile_fd = open(argv[1], O_RDONLY);
-		if (ppx.infile_fd < 0)
-			ppx_exit_error(ERROR_INF);
-		ppx.outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (ppx.outfile_fd < 0)
-			ppx_exit_error(ERROR_OUT);
-		if (pipe(ppx.pipe_fd) < 0)
-			ppx_exit_error(ERROR_PIP);
-		ppx.raw_cmd_paths = ppx_search_paths(envp);
-		ppx.cut_cmd_paths = ft_split(ppx.raw_cmd_paths, ':');
-		ppx_children_birth(ppx, argv, envp);
-		ppx_close_pipe(&ppx);
-		waitpid(ppx.child_1_pid, NULL, 0);
-		waitpid(ppx.child_2_pid, NULL, 0);
-		ppx_final_free(&ppx);
-	}
-	else
-		ft_putstr_fd(ERROR_ARG, STDERR_FILENO);
+	if (argc != 5)
+		ppx_exit_error(ERROR_ARG);
+	ppx.infile_fd = open(argv[1], O_RDONLY);
+	if (ppx.infile_fd <= -1)
+		ppx_exit_error(ERROR_INF);
+	if (pipe(ppx.pipe_fd) <= -1)
+		ppx_exit_error(ERROR_PIP);
+	ppx.outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (ppx.outfile_fd <= -1)
+		ppx_exit_error(ERROR_OUT);
+	ppx.raw_cmd_paths = ppx_search_paths(envp);
+	ppx.cut_cmd_paths = ft_split(ppx.raw_cmd_paths, ':');
+	ppx_separated_at_birth(ppx, argv, envp);
+	ppx_close_pipe(&ppx);
+	waitpid(ppx.child_1_pid, NULL, 0);
+	waitpid(ppx.child_2_pid, NULL, 0);
+	ppx_final_free(&ppx);
 	return (0);
 }
