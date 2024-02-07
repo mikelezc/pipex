@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/06 13:53:54 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:17:19 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 	dup2(ppx.pipe_fd[1], STDOUT_FILENO);
 	close(ppx.pipe_fd[0]);
 	dup2(ppx.infile_fd, STDIN_FILENO);
-	ppx.cmd_args = ft_split(argv[2], ' ');
-	ppx.cmd = get_command(ppx.cut_cmd_paths, ppx.cmd_args[0]);
-	if (!ppx.cmd)
+	ppx.cmd_argv = ft_split(argv[2], ' ');
+	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
+	if (!ppx.cmd_pathname)
 	{
-		while (ppx.cmd_args[i])
-			free(ppx.cmd_args[i++]);
-		free(ppx.cmd_args);
-		free(ppx.cmd);
+		while (ppx.cmd_argv[i])
+			free(ppx.cmd_argv[i++]);
+		free(ppx.cmd_argv);
+		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
 	}
-	if (execve(ppx.cmd, ppx.cmd_args, envp) == -1)
+	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) == -1)
 		ppx_exit_error(ERROR_EXE);
 }
 
@@ -42,17 +42,17 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 	dup2(ppx.pipe_fd[0], STDIN_FILENO);
 	close(ppx.pipe_fd[1]);
 	dup2(ppx.outfile_fd, STDOUT_FILENO);
-	ppx.cmd_args = ft_split(argv[3], ' ');
-	ppx.cmd = get_command(ppx.cut_cmd_paths, ppx.cmd_args[0]);
-	if (!ppx.cmd)
+	ppx.cmd_argv = ft_split(argv[3], ' ');
+	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
+	if (!ppx.cmd_pathname)
 	{
-		while (ppx.cmd_args[i])
-			free(ppx.cmd_args[i++]);
-		free(ppx.cmd_args);
-		free(ppx.cmd);
+		while (ppx.cmd_argv[i])
+			free(ppx.cmd_argv[i++]);
+		free(ppx.cmd_argv);
+		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
 	}
-	if (execve(ppx.cmd, ppx.cmd_args, envp) == -1)
+	if (execve(ppx.cmd_pathname, ppx.cmd_argv, envp) == -1)
 		ppx_exit_error(ERROR_EXE);
 }
 
@@ -87,10 +87,10 @@ int	main(int argc, char **argv, char **envp)
 		ppx.raw_cmd_paths = ppx_search_paths(envp);
 		ppx.cut_cmd_paths = ft_split(ppx.raw_cmd_paths, ':');
 		ppx_children_birth(ppx, argv, envp);
-		close_ends(&ppx);
+		ppx_close_pipe(&ppx);
 		waitpid(ppx.child_1_pid, NULL, 0);
 		waitpid(ppx.child_2_pid, NULL, 0);
-		free_parent(&ppx);
+		ppx_final_free(&ppx);
 	}
 	else
 		ft_putstr_fd(ERROR_ARG, STDERR_FILENO);
