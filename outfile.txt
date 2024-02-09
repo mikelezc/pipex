@@ -1,0 +1,7 @@
+- Esta línea es un ejemplo de patrón.
+- Otra línea de patrón.
+- Una tercera línea de patrón.
+- patrón new data
+- patrón new value
+Aquí tienes algunas líneas que contienen el patrón "patrón":
+patrón patrón patrón

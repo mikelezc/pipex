@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 12:04:55 by mlezcano         ###   ########.fr       */
+/*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
+/*   Updated: 2024/02/08 19:06:07 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 //libraries
 # include <stdio.h>
@@ -31,31 +31,48 @@
 # define ERROR_INF "Infile Error\n"
 # define ERROR_OUT "Outfile Error\n"
 # define ERROR_PIP "Pipe Error\n"
+# define ERROR_HRD "Here_doc Error\n"
+# define ERROR_ENV "Enviroment Error\n"
 
 //storage structure
-typedef struct s_ppx
+typedef struct s_ppxbonus
 {
-	int		infile_fd;
-	int		outfile_fd;
-	int		pipe_fd[2];
-	char	*raw_cmd_paths;
-	char	**cut_cmd_paths;
-	pid_t	child_1_pid;
-	pid_t	child_2_pid;
-	char	**cmd_argv;
-	char	*cmd_pathname;
-}	t_ppx;
+	int		infile;
+	int		outfile;
+	int		heredoc;
+	char	*path;
+	char	**cmd_paths;
+	char	**cmd_args;
+	char	*cmd;
+	int		cmd_nbs;
+	int		pipe_nbs;
+	int		*end;
+	int		index;
+	pid_t	pid;
+}	t_bnsppx;
 
-//pipex (main)
-void	ppx_child_1(t_ppx ppx, char **argv, char **envp);
-void	ppx_child_2(t_ppx ppx, char **argv, char **envp);
-void	ppx_separated_at_birth(t_ppx ppx, char *argv[], char *envp[]);
+//pipex_bonus (main)
+void	close_ends(t_bnsppx *bppx);
 
-//utils
-char	*ppx_search_paths(char **envp);
-char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname);
-void	ppx_close_pipe(t_ppx *ppx);
-void	ppx_final_free(t_ppx *ppx);
+//utils_bonus
+char	*get_path(char **envp);
+char	*get_command(char **env_paths, char *cmd);
 void	ppx_exit_error(char *err);
+
+//child_bonus
+void	child(t_bnsppx bppx, char **argv, char **envp);
+
+//files_bonus
+void	get_infile(char **argv, t_bnsppx *bppx);
+void	get_outfile(char *argv, t_bnsppx *bppx);
+
+//here_doc_bonus
+int		args_eval(char *argv, t_bnsppx *bppx);
+void	here_doc(char *argv, t_bnsppx *bppx);
+
+//free_bonus
+void	free_pipe(t_bnsppx *bppx);
+void	free_child(t_bnsppx *bppx);
+void	free_parent(t_bnsppx *bppx);
 
 #endif

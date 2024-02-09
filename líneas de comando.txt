@@ -1,0 +1,91 @@
+OK tests
+
+1. Este comando toma el contenido de infile.txt, 
+aplica el comando grep a1 para filtrar las líneas que contienen "a1", 
+luego aplica el comando wc -w para contar el número de palabras en la salida filtrada. 
+Finalmente, escribe el conteo de palabras en outfile.txt.
+
+	./pipex infile.txt "grep a1" "wc -w" outfile.txt
+	< infile.txt grep a1 | wc -w
+
+2. Este comando toma el contenido de infile.txt, 
+aplica el comando ls -l para listar archivos en formato largo, 
+luego aplica el comando wc -l para contar el número de líneas en la salida. 
+Finalmente, escribe el conteo de líneas en outfile.txt.
+
+	./pipex infile.txt "ls -l" "wc -l" outfile.txt
+	< infile.txt ls -l | wc -l 
+
+3. Este comando toma el contenido de infile.txt, 
+aplica el comando ls -l para listar archivos en formato largo, 
+luego pasa la salida al comando cat. 
+El resultado se escribe en un archivo llamado outfile.
+
+	./pipex infile.txt "ls -l" "cat" outfile 
+	< infile.txt ls -l | cat
+
+4. Este comando toma el contenido de infile.txt, 
+aplica el comando grep Hello para filtrar líneas que contienen "Hello", 
+luego pasa la salida a /bin/cat. El resultado se escribe en outfile.txt.
+
+	./pipex infile.txt "grep Hello" "/bin/cat" outfile.txt
+	< infile.txt grep Hello | /bin/cat
+
+5. Este comando toma el contenido de infile.txt, 
+lo pasa al comando cat, luego pasa la salida al comando hostname. 
+El resultado se escribe en outfile.txt.
+
+	./pipex infile.txt "cat" "hostname" "outfile.txt"
+	< infile.txt cat | hostname
+
+6. Este comando toma el contenido de infile.txt, 
+aplica el comando grep Now para filtrar líneas que contienen "Now", 
+luego toma las dos primeras líneas de la salida filtrada usando head. 
+El resultado se escribe en outfile.txt.
+	
+	./pipex infile.txt "grep Now" "head -2" "outfile.txt"
+	< infile.txt grep Now | head -2
+
+7. Este comando toma el contenido de infile.txt, 
+aplica el comando grep Now para filtrar líneas que contienen "Now", 
+luego pasa la salida al comando cat. El resultado se escribe en outfile.txt.
+
+	./pipex infile.txt "grep Now" "cat" "outfile.txt"
+	< infile.txt grep Now | cat
+
+8. Este comando toma el contenido del archivo infile.txt, 
+filtra las líneas que contienen "Now", y luego pasa esa salida a cat,
+ que simplemente muestra el contenido en la salida estándar. 
+ En otras palabras, muestra las líneas de infile.txt que contienen "Now".
+
+	./pipex infile.txt "grep Now" "$which cat" "outfile.txt"
+	< infile.txt grep Now | $(which cat)
+
+
+BONUS
+
+1. Múltiples pipes puestos en serie.
+
+	Desglose de la línea de comando:
+
+		cat archivo.txt: Lee el contenido del archivo archivo.txt.
+
+		grep "patrón": Filtra las líneas que contienen el texto entre comillas.
+
+		sed 's/old/new/g': Reemplaza todas las ocurrencias de la cadena "old" por "new" en las líneas recibidas.
+
+		sort: Ordena las líneas recibidas alfabéticamente.
+
+		uniq: Filtra líneas duplicadas consecutivas y las envía a la salida estándar.
+
+		> resultado.txt: Redirige la salida estándar al archivo resultado.txt.
+
+./pipex_bonus infile_bonus.txt "grep "patrón" " "sed s/old/new/g" "sort" "uniq" "outfile.txt" 
+< infile_bonus.txt | grep "patrón" | sed 's/old/new/g' | sort | uniq 
+
+2. El programa replica el uso de << y >>.
+
+Pruebe algo como:
+$ echo "Esto es una prueba." << EOD | wc -l >> outfile.txt
+CMD1
+EOD

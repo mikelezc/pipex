@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:37:24 by mlezcano          #+#    #+#             */
-/*   Updated: 2023/10/29 20:21:36 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:22:54 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*gnl_surplus(char *container)
 		free(container);
 		return (NULL);
 	}
-	str = malloc(sizeof(char) * (ft_strlen(container) - i + 1));
+	str = malloc(sizeof(char) * (gnl_strlen(container) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;

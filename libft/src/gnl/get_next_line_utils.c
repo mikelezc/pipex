@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:38:58 by mlezcano          #+#    #+#             */
-/*   Updated: 2023/10/29 19:41:25 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:23:05 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	}
 	if (!s2)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
+	str = malloc(sizeof(char) * ((gnl_strlen(s1) + gnl_strlen(s2)) + 1));
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -62,7 +62,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-size_t	ft_strlen(char const *word)
+size_t	gnl_strlen(char const *word)
 {
 	size_t		i;
 

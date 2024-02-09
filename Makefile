@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/05 21:16:07 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/08 18:02:53 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SHELL		=	/bin/bash
 #compiler
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g
+CFLAGS		= -Wall -Wextra -g3 -fsanitize=address  -O
 RM			= rm -f
 ECHO		= echo -e
 
@@ -50,7 +50,7 @@ BONUS_DIR	=	bonus/
 
 #src files
 PIP_FILES	=	pipex utils
-BONUS_FILES	=	
+BONUS_FILES	=	pipex_bonus utils_bonus here_doc_bonus free_bonus files_bonus child_bonus
 
 SRC_FILES	=	$(addprefix $(PIP_DIR), $(PIP_FILES))
 SRC_BFILES	=	$(addprefix $(BONUS_DIR), $(BONUS_FILES))
@@ -117,7 +117,7 @@ re:			fclean all
 			@$(ECHO) -n "$(RED)[$(DEF_COLOR)"
 			@make allbonus
 
-allbonus:		$(BNAME)
+bonus:		$(BNAME)
 
 $(BNAME):	$(BOBJ) $(COBJ)
 			@$(ECHO) -n "$(RED)]$(DEF_COLOR)"
@@ -127,5 +127,7 @@ $(BNAME):	$(BOBJ) $(COBJ)
 			@$(ECHO) -n "$(YELLOW)[$(BNAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(BSRC) $(COMMON) $(HEADER) libft.a -o $(BNAME)
 			@$(ECHO) "$(GREEN) => OK!$(DEF_COLOR)"
+
+rebonus:	fclean $(BNAME)
 
 .PHONY:		all clean fclean re bonus
