@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 17:33:48 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/08 18:02:29 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/09 13:00:56 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,14 +86,14 @@ OBJF		=	.cache_exists
 
 start:
 			@echo -e -n "$(GREEN)[LIBFT]:\t$(DEF_COLOR)"
-			@echo -e -n "$(WHITE)[$(DEF_COLOR)"
+			@echo -e -n "$(GREEN)[$(DEF_COLOR)"
 			@make all
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
-			@echo -e -n "$(WHITE)]$(DEF_COLOR)"
+			@echo -e -n "$(GREEN)]$(DEF_COLOR)"
 			@$(ECHO) "$(GREEN) => OK!​$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)

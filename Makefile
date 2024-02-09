@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/09 12:57:04 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/09 13:00:20 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,13 +69,13 @@ OBJF		=	.cache_exists
 
 start:
 			@$(ECHO) -n "$(GREEN)[Dependencies]:\t$(DEF_COLOR)"
-			@$(ECHO) -n "$(WHITE)[$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN)[$(DEF_COLOR)"
 			@make all
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(COBJ) $(OBJF)
-			@$(ECHO) -n "$(WHITE)]$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN)]$(DEF_COLOR)"
 			@$(ECHO) -n "$(GREEN) => OK! $(DEF_COLOR)\n"
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
