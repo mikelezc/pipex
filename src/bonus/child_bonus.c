@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/09 10:37:12 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:52:30 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ access() in get_command()*/
 void	child(t_bnsppx bppx, char **argv, char **envp)
 {
 	bppx.pid = fork();
-
 	if (bppx.pid < 0)
 		ppx_exit_error(ERROR_FRK);
 	else if (!bppx.pid)

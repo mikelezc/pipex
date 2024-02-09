@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:05:33 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/09 12:42:38 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:50:51 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	get_infile(char **argv, t_bnsppx *bppx)
 }
 
 void	get_outfile(char *argv, t_bnsppx *bppx)
-{	
-	if(bppx->heredoc)
+{
+	if (bppx->heredoc)
 		bppx->outfile = open(argv, O_APPEND | O_CREAT | O_WRONLY, 0644);
 	else
 		bppx->outfile = open(argv, O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	if (bppx->outfile < 0)
-			ppx_exit_error(ERROR_OUT);
+		ppx_exit_error(ERROR_OUT);
 }

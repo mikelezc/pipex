@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/09 12:40:41 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/09 12:57:04 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ SHELL		=	/bin/bash
 #compiler
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address  -O
+CFLAGS		= -Wall -Wextra -Werror -g
 RM			= rm -f
 ECHO		= echo -e
+FSANITIZE	= -fsanitize=address -g3
 
 #output
 NAME		= pipex

@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:27:26 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 18:46:48 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:53:26 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_parent(t_bnsppx *bppx)
 
 void	free_child(t_bnsppx *bppx)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (bppx->cmd_args[i])
@@ -50,5 +50,4 @@ void	free_pipe(t_bnsppx *bppx)
 	free(bppx->end);
 	ppx_exit_error(ERROR_ENV);
 	exit(1);
-
 }
