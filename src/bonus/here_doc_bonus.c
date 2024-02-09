@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:48 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 18:46:25 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:41:25 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	args_eval(char *argv, t_bnsppx *bppx)
 	}
 }
 
-void	here_doc(char *argv, t_bnsppx *bppx)
+void	here_doc(char *argv)
 {
-    int		temp_fd;
-    int		stdin_fd;
+	int		temp_fd;
+	int		stdin_fd;
 	char	*line;
 
 	temp_fd = open(".heredoc.temp", O_TRUNC | O_CREAT | O_WRONLY, 0644);
@@ -37,7 +37,7 @@ void	here_doc(char *argv, t_bnsppx *bppx)
 	if (temp_fd < 0)
 		ppx_exit_error(ERROR_HRD);
 	line = "";
-	while(1)
+	while (1)
 	{
 		ft_putstr_fd("here_doc> ", 1);
 		line = get_next_line(stdin_fd);
@@ -45,7 +45,7 @@ void	here_doc(char *argv, t_bnsppx *bppx)
 			break ;
 		if (!ft_strncmp(argv, line, ft_strlen(argv + 1)))
 			close(stdin_fd);
-		else 
+		else
 			ft_putstr_fd(line, temp_fd);
 		free(line);
 	}

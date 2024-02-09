@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/08 18:02:53 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/09 12:40:41 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SHELL		=	/bin/bash
 #compiler
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -g3 -fsanitize=address  -O
+CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address  -O
 RM			= rm -f
 ECHO		= echo -e
 
@@ -110,24 +110,25 @@ fclean:		clean
 
 
 re:			fclean all
-			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [push_swap]!🙌🙌🙌$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [push_swap]! 🙌🙌🙌$(DEF_COLOR)\n"
 
-			bonus:
-			@$(ECHO) -n "$(YELLOW)[Dependencies]:\t$(DEF_COLOR)"
-			@$(ECHO) -n "$(RED)[$(DEF_COLOR)"
+bonus:
+			@$(ECHO) -n "$(GREEN)[Dependencies]:\t$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN)[$(DEF_COLOR)"
 			@make allbonus
 
-bonus:		$(BNAME)
+allbonus:		$(BNAME)
 
 $(BNAME):	$(BOBJ) $(COBJ)
-			@$(ECHO) -n "$(RED)]$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN)]$(DEF_COLOR)"
 			@$(ECHO) -n "$(GREEN) => OK!$(DEF_COLOR)\n"
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
-			@$(ECHO) -n "$(YELLOW)[$(BNAME)]:\t$(DEF_COLOR)"
+			@$(ECHO) -n "$(GREEN)[$(BNAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(BSRC) $(COMMON) $(HEADER) libft.a -o $(BNAME)
 			@$(ECHO) "$(GREEN) => OK!$(DEF_COLOR)"
 
-rebonus:	fclean $(BNAME)
+rebonus:	fclean bonus
+			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [push_swap_bonus]! 🙌🙌🙌$(DEF_COLOR)\n"
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re bonus rebonus allbonus

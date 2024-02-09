@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:05:33 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 18:50:00 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:42:38 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	get_infile(char **argv, t_bnsppx *bppx)
 {
-	if(ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{
-		here_doc(argv[2], bppx); 
+		here_doc(argv[2]);
 		bppx->infile = open(".heredoc.temp", O_RDONLY);
 		if (bppx->infile < 0)
 		{

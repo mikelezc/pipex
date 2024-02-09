@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 19:06:07 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:41:56 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	get_outfile(char *argv, t_bnsppx *bppx);
 
 //here_doc_bonus
 int		args_eval(char *argv, t_bnsppx *bppx);
-void	here_doc(char *argv, t_bnsppx *bppx);
+void	here_doc(char *argv);
 
 //free_bonus
 void	free_pipe(t_bnsppx *bppx);

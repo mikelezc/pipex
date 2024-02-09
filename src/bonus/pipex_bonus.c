@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:34:43 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 18:46:12 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:02:17 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	close_ends(t_bnsppx *bppx)
 	}
 }
 
-/*void	leaks(void)
+void	leaks(void)
 {
 	system("leaks pipex_bonus");
-}*/
+}
 
 int main(int argc, char **argv, char **envp)
 {
@@ -68,7 +68,7 @@ int main(int argc, char **argv, char **envp)
 	}
 	close_ends(&bppx);
 	waitpid(-1, NULL, 0);
-	//atexit(leaks);
+	atexit(leaks);
 	free_parent(&bppx);
 	return (0);
 }

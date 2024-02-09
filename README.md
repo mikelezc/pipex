@@ -17,6 +17,9 @@ Estudio, comprensión y pruebas con algunas de las nuevas funciones.
 Concluyendo que , al menos en la parte no bonus, necesitaré: dup2, fork, pipe, access, execve y waitpid.
 Hago apuntes en la pizarra y elaboro una lista de vídeos en youtube con los nuevos conceptos aprendidos.
 
+- 9 febrero de 2024.
+Avanzando con el código, realizo algunas pruebas.
+
 
 
 
