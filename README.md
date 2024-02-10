@@ -20,6 +20,13 @@ Hago apuntes en la pizarra y elaboro una lista de vídeos en youtube con los nue
 - 9 febrero de 2024.
 Avanzando con el código, realizo algunas pruebas.
 
+- 10 febrero de 2024
+Estudio diferentes comandos de bash que se piden en el subject del bonus, ya que mi intención es hacerlo con bonus.
+Veo la utilización de here_doc
+Sigo Avanzanzando en la función principal y empiezo a plantear como hacer el bonus
+
+
+
 
 
 
