@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
+/*   bppx_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:48 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/09 12:41:25 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:31:42 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-int	args_eval(char *argv, t_bnsppx *bppx)
+int	bppx_is_here_doc(char *argv, t_bnsppx *bppx)
 {
 	if (ft_strncmp(argv, "here_doc", 8) == 0)
 	{
-		bppx->heredoc = 1;
+		bppx->here_doc = 1;
 		return (6);
 	}
 	else
 	{
-		bppx->heredoc = 0;
+		bppx->here_doc = 0;
 		return (5);
 	}
 }
 
-void	here_doc(char *argv)
+void	bppx_here_doc(char *argv)
 {
 	int		temp_fd;
 	int		stdin_fd;
@@ -35,8 +35,11 @@ void	here_doc(char *argv)
 	temp_fd = open(".heredoc.temp", O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	stdin_fd = dup(STDIN_FILENO);
 	if (temp_fd < 0)
-		ppx_exit_error(ERROR_HRD);
-	line = "";
+	{
+		close(temp_fd);
+		bppx_exit_error(ERROR_HRD);
+	}
+	line = NULL;
 	while (1)
 	{
 		ft_putstr_fd("here_doc> ", 1);

@@ -83,9 +83,23 @@ BONUS
 ./pipex_bonus infile_bonus.txt "grep "patrón" " "sed s/old/new/g" "sort" "uniq" "outfile.txt" 
 < infile_bonus.txt | grep "patrón" | sed 's/old/new/g' | sort | uniq 
 
-2. El programa replica el uso de << y >>.
+2. Ejemplo de la utilización de here_doc
 
-Pruebe algo como:
-$ echo "Esto es una prueba." << EOD | wc -l >> outfile.txt
-CMD1
-EOD
+"CMD << STOP_VALUE | CMD1 >> archivo1" varias veces
+
+cat << END | grep "ejemplo" >> outfile.txt
+Este es un ejemplo de here document.
+Puedes incluir múltiples líneas de texto aquí.
+END
+
+Este comando de bash ejecuta lo siguiente:
+
+cat << END: Esto inicia "here document", que es una forma de incluir texto en un script de shell directamente en línea. 
+
+END es el delimitador que marca el final del here document.
+
+| grep "ejemplo": Esto envía la salida del here document al comando grep, que filtrará las líneas que contienen la palabra "ejemplo".
+
+>> outfile.txt: Esto redirige la salida del comando grep (que contiene las líneas que contienen "ejemplo") al archivo outfile.txt, agregando el resultado al final del archivo si ya existe.
+
+Entonces, en resumen, este comando toma el texto entre << END y END, filtra las líneas que contienen la palabra "ejemplo" y luego agrega esas líneas al final del archivo outfile.txt.

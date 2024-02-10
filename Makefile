@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/09 13:00:20 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/10 12:20:57 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ BONUS_DIR	=	bonus/
 
 #src files
 PIP_FILES	=	pipex utils
-BONUS_FILES	=	pipex_bonus utils_bonus here_doc_bonus free_bonus files_bonus child_bonus
+BONUS_FILES	=	bppx_pipex bppx_utils bppx_here_doc bppx_free bppx_in_out bppx_childs
 
 SRC_FILES	=	$(addprefix $(PIP_DIR), $(PIP_FILES))
 SRC_BFILES	=	$(addprefix $(BONUS_DIR), $(BONUS_FILES))
@@ -81,7 +81,7 @@ $(NAME):	$(OBJ) $(COBJ) $(OBJF)
 			@cp libft/libft.a .
 			@$(ECHO) -n "$(GREEN)[$(NAME)]:\t$(DEF_COLOR)"
 			@$(CC) $(CFLAGS) $(OBJ) $(COBJ) $(HEADER) libft.a -o $(NAME)
-			@$(ECHO) "$(GREEN) => OK!​$(DEF_COLOR)"
+			@$(ECHO) "$(GREEN) => OK!$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
 			@$(ECHO) -n "$(DEF_COLOR)=$(DEF_COLOR)"

@@ -1,0 +1,4 @@
+Este es un ejemplo de here document.
+Puedes incluir múltiples líneas de texto aquí.
+Este es un ejemplo de here document.
+Puedes incluir múltiples líneas de texto aquí.

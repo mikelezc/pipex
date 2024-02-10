@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:46:16 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/09 12:52:57 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:46:26 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-char	*get_path(char **envp)
+char	*bppx_search_paths(char **envp)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ char	*get_command(char **env_paths, char *cmd)
 	return (NULL);
 }
 
-void	ppx_exit_error(char *err)
+void	bppx_exit_error(char *err)
 {
 	perror(err);
 	exit(EXIT_FAILURE);

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_bonus.c                                       :+:      :+:    :+:   */
+/*   bppx_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:27:26 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/09 12:53:26 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:24:50 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-void	free_parent(t_bnsppx *bppx)
+void	bppx_final_parent(t_bnsppx *bppx)
 {
 	int	i;
 
 	i = 0;
-	close(bppx->infile);
-	close(bppx->outfile);
-	if (bppx->heredoc)
+	close(bppx->infile_fd);
+	close(bppx->outfile_fd);
+	if (bppx->here_doc)
 		unlink(".heredoc.temp");
 	while (bppx->cmd_paths[i])
 	{
@@ -41,13 +41,13 @@ void	free_child(t_bnsppx *bppx)
 	free(bppx->cmd);
 }
 
-void	free_pipe(t_bnsppx *bppx)
+void	bppx_final_pipe(t_bnsppx *bppx)
 {
-	close(bppx->infile);
-	close(bppx->outfile);
-	if (bppx->heredoc)
+	close(bppx->infile_fd);
+	close(bppx->outfile_fd);
+	if (bppx->here_doc)
 		unlink(".heredoc.temp");
 	free(bppx->end);
-	ppx_exit_error(ERROR_ENV);
+	bppx_exit_error(ERROR_ENV);
 	exit(1);
 }

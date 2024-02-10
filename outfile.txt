@@ -5,3 +5,7 @@
 - patrón new value
 Aquí tienes algunas líneas que contienen el patrón "patrón":
 patrón patrón patrón
+       0
+       1
+       1
+Este es un ejemplo de here document.
