@@ -8,4 +8,5 @@ patrón patrón patrón
        0
        1
        1
-Este es un ejemplo de here document.
+
+

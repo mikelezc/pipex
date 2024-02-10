@@ -87,18 +87,25 @@ BONUS
 
 "CMD << STOP_VALUE | CMD1 >> archivo1" varias veces
 
-cat << END | grep "ejemplo" >> outfile.txt
+
+$> ./pipex_bonus "here_doc" EOF cat grep "ejemplo" outfile.txt
 Este es un ejemplo de here document.
 Puedes incluir múltiples líneas de texto aquí.
-END
+EOF
+
+
+$> cat << EOF | grep "ejemplo" >> outfile.txt
+Este es un ejemplo de here document.
+Puedes incluir múltiples líneas de texto aquí.
+EOF
 
 Este comando de bash ejecuta lo siguiente:
 
-cat << END: Esto inicia "here document", que es una forma de incluir texto en un script de shell directamente en línea. 
+- cat << END: Inicia "here document", (Incluir texto en un script de shell directamente en línea).
 
-END es el delimitador que marca el final del here document.
+- END es el delimitador que marca el final del here document.
 
-| grep "ejemplo": Esto envía la salida del here document al comando grep, que filtrará las líneas que contienen la palabra "ejemplo".
+- | grep "ejemplo": Envía la salida del here document al comando grep, que filtrará las líneas que contienen la palabra "ejemplo".
 
 >> outfile.txt: Esto redirige la salida del comando grep (que contiene las líneas que contienen "ejemplo") al archivo outfile.txt, agregando el resultado al final del archivo si ya existe.
 
