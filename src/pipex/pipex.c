@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/08 12:12:54 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:07:10 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		ppx_exit_error(ERROR_INF);
 	if (pipe(ppx.pipe_fd) <= -1)
 		ppx_exit_error(ERROR_PIP);
-	ppx.outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	ppx.outfile_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0000644);
 	if (ppx.outfile_fd <= -1)
 		ppx_exit_error(ERROR_OUT);
 	ppx.raw_cmd_paths = ppx_search_paths(envp);
