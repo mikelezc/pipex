@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bppx_free.c                                        :+:      :+:    :+:   */
+/*   bppx_ends.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:27:26 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/10 13:24:50 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:59:47 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
+
+void	bppx_exit_error(char *err)
+{
+	perror(err);
+	exit(EXIT_FAILURE);
+}
 
 void	bppx_final_parent(t_bnsppx *bppx)
 {
@@ -21,16 +27,16 @@ void	bppx_final_parent(t_bnsppx *bppx)
 	close(bppx->outfile_fd);
 	if (bppx->here_doc)
 		unlink(".heredoc.temp");
-	while (bppx->cmd_paths[i])
+	while (bppx->cut_cmd_paths[i])
 	{
-		free(bppx->cmd_paths[i]);
+		free(bppx->cut_cmd_paths[i]);
 		i++;
 	}
-	free(bppx->cmd_paths);
-	free(bppx->end);
+	free(bppx->cut_cmd_paths);
+	free(bppx->pipe_ends_fd);
 }
 
-void	free_child(t_bnsppx *bppx)
+void	bppx_final_child(t_bnsppx *bppx)
 {
 	int	i;
 
@@ -39,6 +45,7 @@ void	free_child(t_bnsppx *bppx)
 		free(bppx->cmd_args[i++]);
 	free(bppx->cmd_args);
 	free(bppx->cmd);
+	bppx_exit_error(ERROR_CMD);
 }
 
 void	bppx_final_pipe(t_bnsppx *bppx)
@@ -47,7 +54,6 @@ void	bppx_final_pipe(t_bnsppx *bppx)
 	close(bppx->outfile_fd);
 	if (bppx->here_doc)
 		unlink(".heredoc.temp");
-	free(bppx->end);
+	free(bppx->pipe_ends_fd);
 	bppx_exit_error(ERROR_ENV);
-	exit(1);
 }

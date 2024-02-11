@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/10 13:24:37 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:59:53 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,24 @@ void	bppx_dup2(int zero, int one)
 	dup2 (one, STDOUT_FILENO);
 }
 
+char	*bppx_polish_cmd(char **env_paths, char *cmd)
+{
+	char	*temp;
+	char	*command;
+
+	while (*env_paths)
+	{
+		temp = ft_strjoin(*env_paths, "/");
+		command = ft_strjoin(temp, cmd);
+		free(temp);
+		if (access(command, F_OK | X_OK) == 0)
+			return (command);
+		free(command);
+		env_paths++;
+	}
+	return (NULL);
+}
+
 void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp)
 {
 	bppx.pid = fork();
@@ -26,20 +44,17 @@ void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp)
 	else if (!bppx.pid)
 	{
 		if (bppx.index == 0)
-			bppx_dup2(bppx.infile_fd, bppx.end[1]);
-		else if (bppx.index == bppx.cmd_nbs - 1)
-			bppx_dup2(bppx.end[2 * bppx.index - 2], bppx.outfile_fd);
+			bppx_dup2(bppx.infile_fd, bppx.pipe_ends_fd[1]);
+		else if (bppx.index == bppx.cmd_amnt - 1)
+			bppx_dup2(bppx.pipe_ends_fd[2 * bppx.index - 2], bppx.outfile_fd);
 		else
-			bppx_dup2(bppx.end[2 * bppx.index - 2],
-				bppx.end[2 * bppx.index + 1]);
-		bppx_close_end(&bppx);
+			bppx_dup2(bppx.pipe_ends_fd[2 * bppx.index - 2],
+				bppx.pipe_ends_fd[2 * bppx.index + 1]);
+		bppx_close_ends(&bppx);
 		bppx.cmd_args = ft_split(argv[2 + bppx.here_doc + bppx.index], ' ');
-		bppx.cmd = get_command(bppx.cmd_paths, bppx.cmd_args[0]);
+		bppx.cmd = bppx_polish_cmd(bppx.cut_cmd_paths, bppx.cmd_args[0]);
 		if (!bppx.cmd)
-		{
-			free_child(&bppx);
-			bppx_exit_error(ERROR_CMD);
-		}
+			bppx_final_child(&bppx);
 		if (execve(bppx.cmd, bppx.cmd_args, envp) == -1)
 			bppx_exit_error(ERROR_EXE);
 	}

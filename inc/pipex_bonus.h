@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/10 13:24:28 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:00:03 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,41 +40,37 @@ typedef struct s_ppxbonus
 	int		infile_fd;
 	int		outfile_fd;
 	int		here_doc;
-	char	*path;
-	char	**cmd_paths;
+	char	*raw_cmd_paths;
+	char	**cut_cmd_paths;
 	char	**cmd_args;
 	char	*cmd;
-	int		cmd_nbs;
-	int		pipe_nbs;
-	int		*end;
+	int		cmd_amnt;
+	int		pipe_ends_amnt;
+	int		*pipe_ends_fd;
 	int		index;
 	pid_t	pid;
 }	t_bnsppx;
 
-//pipex_bppx (main)
+//bppx_pipex (main)
 void	bppx_welding_pipes(t_bnsppx *bppx);
-void	bppx_close_end(t_bnsppx *bppx);
-
-//utils_bppx
+void	bppx_close_ends(t_bnsppx *bppx);
 char	*bppx_search_paths(char **envp);
-char	*get_command(char **env_paths, char *cmd);
-void	bppx_exit_error(char *err);
+int		bppx_valid_argc(char *argv, t_bnsppx *bppx);
 
-//childs_bppx
+//bppx_fd_handling
+void	bppx_outfile_fd(char *argv, t_bnsppx *bppx);
+void	bppx_here_doc(char *argv);
+void	bppx_infile_fd(char **argv, t_bnsppx *bppx);
+
+//bppx_childs
 void	bppx_dup2(int zero, int one);
+char	*bppx_polish_cmd(char **env_paths, char *cmd);
 void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp);
 
-//in_out_bppx
-void	bppx_infile_fd(char **argv, t_bnsppx *bppx);
-void	bppx_outfile_fd(char *argv, t_bnsppx *bppx);
-
-//here_doc_bppx
-int		bppx_is_here_doc(char *argv, t_bnsppx *bppx);
-void	bppx_here_doc(char *argv);
-
-//free_bppx
+//bppx_ends
+void	bppx_exit_error(char *err);
 void	bppx_final_pipe(t_bnsppx *bppx);
-void	free_child(t_bnsppx *bppx);
+void	bppx_final_child(t_bnsppx *bppx);
 void	bppx_final_parent(t_bnsppx *bppx);
 
 #endif
