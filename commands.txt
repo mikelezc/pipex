@@ -1,62 +1,78 @@
 OK tests
 
-1. Este comando toma el contenido de infile.txt, 
-aplica el comando grep a1 para filtrar las líneas que contienen "a1", 
-luego aplica el comando wc -w para contar el número de palabras en la salida filtrada. 
-Finalmente, escribe el conteo de palabras en outfile.txt.
+1.	Este comando toma el contenido de infile.txt, 
+	"grep a1" filtra las líneas que contienen "a1", 
+	"wc -w"  cuenta el número de palabras en la salida filtrada. 
+	Escribe el conteo de palabras en outfile.txt.
 
 	./pipex infile.txt "grep a1" "wc -w" outfile.txt
 	< infile.txt grep a1 | wc -w
 
-2. Este comando toma el contenido de infile.txt, 
-aplica el comando ls -l para listar archivos en formato largo, 
-luego aplica el comando wc -l para contar el número de líneas en la salida. 
-Finalmente, escribe el conteo de líneas en outfile.txt.
+
+2.	Este comando toma el contenido de infile.txt, 
+	"ls -l" lista archivos en formato largo, 
+	"wc -l" cuenta el número de líneas en la salida. 
+	Escribe el conteo de líneas en outfile.txt.
 
 	./pipex infile.txt "ls -l" "wc -l" outfile.txt
 	< infile.txt ls -l | wc -l 
 
-3. Este comando toma el contenido de infile.txt, 
-aplica el comando ls -l para listar archivos en formato largo, 
-luego pasa la salida al comando cat. 
-El resultado se escribe en un archivo llamado outfile.
 
-	./pipex infile.txt "ls -l" "cat" outfile 
+3.	Este comando toma el contenido de infile.txt, 
+	"ls -l" lista archivos en formato largo, 
+	"cat" "concatenate" concatena y muestra el contenido de archivos, pero en este caso,
+	crea, concatena y mouestra contenido de archivos.
+	Se escribe en outfile.txt
+
+	./pipex infile.txt "ls -l" "cat" outfile.txt
 	< infile.txt ls -l | cat
 
-4. Este comando toma el contenido de infile.txt, 
-aplica el comando grep Hello para filtrar líneas que contienen "Hello", 
-luego pasa la salida a /bin/cat. El resultado se escribe en outfile.txt.
+
+4.	Este comando toma el contenido de infile.txt, 
+	"grep Hello" para filtrar líneas que contienen "Hello", 
+	pasa la salida a /bin/cat (lo mismo, que poner cat, 
+	solo que en este caso especificamos en que ruta está el ejecutable cat,
+	con la finalidad de testear el programa)
+	El resultado se escribe en outfile.txt.
 
 	./pipex infile.txt "grep Hello" "/bin/cat" outfile.txt
 	< infile.txt grep Hello | /bin/cat
 
-5. Este comando toma el contenido de infile.txt, 
-lo pasa al comando cat, luego pasa la salida al comando hostname. 
-El resultado se escribe en outfile.txt.
+
+5.	Este comando toma el contenido de infile.txt, 
+	lo pasa al comando cat, luego pasa la salida al comando hostname. 
+	El resultado se escribe en outfile.txt.
 
 	./pipex infile.txt "cat" "hostname" "outfile.txt"
 	< infile.txt cat | hostname
 
-6. Este comando toma el contenido de infile.txt, 
-aplica el comando grep Now para filtrar líneas que contienen "Now", 
-luego toma las dos primeras líneas de la salida filtrada usando head. 
-El resultado se escribe en outfile.txt.
+
+6.	Este comando toma el contenido de infile.txt, 
+	"grep Now" para filtrar líneas que contienen "Now", 
+	"head -2" toma las dos primeras líneas de la salida filtrada. 
+	El resultado se escribe en outfile.txt.
 	
 	./pipex infile.txt "grep Now" "head -2" "outfile.txt"
 	< infile.txt grep Now | head -2
 
-7. Este comando toma el contenido de infile.txt, 
-aplica el comando grep Now para filtrar líneas que contienen "Now", 
-luego pasa la salida al comando cat. El resultado se escribe en outfile.txt.
+
+7.	Este comando toma el contenido de infile.txt, 
+	"grep Now" para filtrar líneas que contienen "Now", 
+	pasa la salida al comando cat. 
+	El resultado se escribe en outfile.txt.
 
 	./pipex infile.txt "grep Now" "cat" "outfile.txt"
 	< infile.txt grep Now | cat
 
-8. Este comando toma el contenido del archivo infile.txt, 
-filtra las líneas que contienen "Now", y luego pasa esa salida a cat,
- que simplemente muestra el contenido en la salida estándar. 
- En otras palabras, muestra las líneas de infile.txt que contienen "Now".
+
+8.	Este comando toma el contenido del archivo infile.txt, 
+	"grep Now" filtra las líneas que contienen "Now", 
+	pasa esa salida a cat,
+	"$which cat" es equivalente a simplemente usar cat.
+	La razón de usar $(which cat) es para especificar explícitamente,
+	la ruta completa del ejecutable cat en lugar de depender
+	de la configuración del entorno del sistema en caso de necesitarlo.
+	El resultado se escribe en outfile.txt.
 
 	./pipex infile.txt "grep Now" "$which cat" "outfile.txt"
 	< infile.txt grep Now | $(which cat)
