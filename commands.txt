@@ -106,7 +106,10 @@ BONUS
 
 $> ./pipex_bonus "here_doc" EOF cat grep "ejemplo" outfile.txt
 Este es un ejemplo de here document.
-Puedes incluir múltiples líneas de texto aquí.
+Hola hola.
+ejemplo hola
+hola ejemplo!
+bye
 EOF
 
 

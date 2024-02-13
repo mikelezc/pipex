@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/11 20:00:03 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:34:49 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,30 @@ typedef struct s_ppxbonus
 	int		cmd_amnt;
 	int		pipe_ends_amnt;
 	int		*pipe_ends_fd;
-	int		index;
 	pid_t	pid;
 }	t_bnsppx;
 
 //bppx_pipex (main)
-void	bppx_welding_pipes(t_bnsppx *bppx);
-void	bppx_close_ends(t_bnsppx *bppx);
-char	*bppx_search_paths(char **envp);
+void	bppx_make_pipes(t_bnsppx *bppx);
+void	bppx_cut_pipes(t_bnsppx *bppx);
+void	bppx_collect_paths(char **envp, t_bnsppx *bppx);
 int		bppx_valid_argc(char *argv, t_bnsppx *bppx);
 
 //bppx_fd_handling
 void	bppx_outfile_fd(char *argv, t_bnsppx *bppx);
 void	bppx_here_doc(char *argv);
 void	bppx_infile_fd(char **argv, t_bnsppx *bppx);
+void	bppx_fd_handling(int argc, char **argv, t_bnsppx *bppx);
 
-//bppx_childs
+//bppx_cmds
 void	bppx_dup2(int zero, int one);
 char	*bppx_polish_cmd(char **env_paths, char *cmd);
-void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp);
+void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i);
 
 //bppx_ends
 void	bppx_exit_error(char *err);
-void	bppx_final_pipe(t_bnsppx *bppx);
-void	bppx_final_child(t_bnsppx *bppx);
-void	bppx_final_parent(t_bnsppx *bppx);
+void	bppx_free_pipe(t_bnsppx *bppx);
+void	bppx_free_child(t_bnsppx *bppx);
+void	bppx_free_parent(t_bnsppx *bppx);
 
 #endif

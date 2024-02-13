@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/10 18:07:10 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:32:43 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	dup2(ppx.pipe_fd[1], STDOUT_FILENO);
 	close(ppx.pipe_fd[0]);
 	dup2(ppx.infile_fd, STDIN_FILENO);
@@ -24,8 +24,8 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
 	if (!ppx.cmd_pathname)
 	{
-		while (ppx.cmd_argv[i])
-			free(ppx.cmd_argv[i++]);
+		while (ppx.cmd_argv[++i])
+			free(ppx.cmd_argv[i]);
 		free(ppx.cmd_argv);
 		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
@@ -38,7 +38,7 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	dup2(ppx.pipe_fd[0], STDIN_FILENO);
 	close(ppx.pipe_fd[1]);
 	dup2(ppx.outfile_fd, STDOUT_FILENO);
@@ -46,8 +46,8 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
 	if (!ppx.cmd_pathname)
 	{
-		while (ppx.cmd_argv[i])
-			free(ppx.cmd_argv[i++]);
+		while (ppx.cmd_argv[++i])
+			free(ppx.cmd_argv[i]);
 		free(ppx.cmd_argv);
 		free(ppx.cmd_pathname);
 		ppx_exit_error(ERROR_CMD);
