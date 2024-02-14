@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/13 22:16:29 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:12:07 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ char	*bppx_polish_cmd(char **env_paths, char *cmd)
 	return (NULL);
 }
 
-void	bppx_dup2(int zero, int one)
+void	bppx_dup2(int std_in, int std_out)
 {
-	dup2 (zero, STDIN_FILENO);
-	dup2 (one, STDOUT_FILENO);
+	dup2 (std_in, STDIN_FILENO);
+	dup2 (std_out, STDOUT_FILENO);
 }
 
 void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i)
@@ -71,4 +71,13 @@ void	bppx_collect_paths(char **envp, t_bnsppx *bppx)
 	bppx->cut_cmd_paths = ft_split(bppx->raw_cmd_paths, ':');
 	if (!bppx->cut_cmd_paths)
 		bppx_free_pipe(bppx);
+}
+
+void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (++i < bppx.cmd_amnt)
+		bppx_born_child(bppx, argv, envp, i);
 }

@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"types.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"pipex_bonus.h": "c"
 	}
 }
