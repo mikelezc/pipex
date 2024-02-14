@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bppx_childs.c                                      :+:      :+:    :+:   */
+/*   bppx_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/13 21:25:51 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:16:29 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i)
 		if (execve(bppx.cmd, bppx.cmd_args, envp) == -1)
 			bppx_exit_error(ERROR_EXE);
 	}
+}
+
+void	bppx_collect_paths(char **envp, t_bnsppx *bppx)
+{
+	int	i;
+
+	i = 0;
+	while (ft_strncmp(envp[i], "PATH=", 5))
+		i++;
+	bppx->raw_cmd_paths = (envp[i] + 5);
+	bppx->cut_cmd_paths = ft_split(bppx->raw_cmd_paths, ':');
+	if (!bppx->cut_cmd_paths)
+		bppx_free_pipe(bppx);
 }

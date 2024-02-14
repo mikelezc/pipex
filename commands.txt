@@ -104,7 +104,7 @@ BONUS
 "CMD << STOP_VALUE | CMD1 >> archivo1" varias veces
 
 
-$> ./pipex_bonus "here_doc" EOF cat grep "ejemplo" outfile.txt
+$> ./pipex_bonus "here_doc" EOF cat "grep "ejemplo"" outfile.txt
 Este es un ejemplo de here document.
 Hola hola.
 ejemplo hola
