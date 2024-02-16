@@ -6,13 +6,13 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:05:33 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 13:35:55 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:12:27 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-void	bppx_here_doc(char *argv)
+void	bppx_here_doc(char *limiter)
 {
 	int		temp_fd;
 	int		stdin_fd;
@@ -32,7 +32,7 @@ void	bppx_here_doc(char *argv)
 		line = get_next_line(stdin_fd);
 		if (line == NULL)
 			break ;
-		if (!ft_strncmp(argv, line, ft_strlen(argv + 1)))
+		if (!ft_strncmp(limiter, line, ft_strlen(limiter + 1)))
 			close(stdin_fd);
 		else
 			ft_putstr_fd(line, temp_fd);
