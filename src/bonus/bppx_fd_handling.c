@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:05:33 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/13 21:05:58 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:27:11 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	bppx_here_doc(char *argv)
 	char	*line;
 
 	temp_fd = open(".heredoc.temp", O_TRUNC | O_CREAT | O_WRONLY, 0000644);
-	stdin_fd = dup(STDIN_FILENO);
 	if (temp_fd < 0)
 	{
 		close(temp_fd);
 		bppx_exit_error(ERROR_HRD);
 	}
 	line = NULL;
+	stdin_fd = dup(STDIN_FILENO);
 	while (1)
 	{
 		ft_putstr_fd("here_doc> ", 1);

@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/14 15:44:16 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:18:58 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 	int	i;
 
 	i = -1;
+	dup2(ppx.infile_fd, STDIN_FILENO);
 	dup2(ppx.pipe_fd[1], STDOUT_FILENO);
 	close(ppx.pipe_fd[0]);
-	dup2(ppx.infile_fd, STDIN_FILENO);
 	ppx.cmd_argv = ft_split(argv[2], ' ');
 	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
 	if (!ppx.cmd_pathname)
@@ -40,8 +40,8 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 
 	i = -1;
 	dup2(ppx.pipe_fd[0], STDIN_FILENO);
-	close(ppx.pipe_fd[1]);
 	dup2(ppx.outfile_fd, STDOUT_FILENO);
+	close(ppx.pipe_fd[1]);
 	ppx.cmd_argv = ft_split(argv[3], ' ');
 	ppx.cmd_pathname = ppx_polish_cmd(ppx.cut_cmd_paths, ppx.cmd_argv[0]);
 	if (!ppx.cmd_pathname)
@@ -56,7 +56,7 @@ void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
 		ppx_exit_error(ERROR_EXE);
 }
 
-void	ppx_cmds(t_ppx ppx, char **argv, char **envp)
+void	ppx_prcs(t_ppx ppx, char **argv, char **envp)
 {
 	ppx.child_1_pid = fork();
 	if (ppx.child_1_pid <= -1)
@@ -91,8 +91,9 @@ int	main(int argc, char **argv, char **envp)
 	ppx_fd_handling(argv, &ppx);
 	ppx.raw_cmd_paths = ppx_search_paths(envp);
 	ppx.cut_cmd_paths = ft_split(ppx.raw_cmd_paths, ':');
-	ppx_cmds(ppx, argv, envp);
-	ppx_close_pipe(&ppx);
+	ppx_prcs(ppx, argv, envp);
+	close(ppx.pipe_fd[1]);
+	close(ppx.pipe_fd[0]);
 	waitpid(ppx.child_1_pid, NULL, 0);
 	waitpid(ppx.child_2_pid, NULL, 0);
 	ppx_final_free(&ppx);

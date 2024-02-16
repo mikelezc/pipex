@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/13 11:33:43 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:18:30 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 char	*ppx_search_paths(char **envp)
 {
-	int	i;
+	int	j;
 
-	i = -1;
-	while (envp[++i])
+	j = -1;
+	while (envp[++j])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (envp[i] + 5);
+		if (ft_strncmp(envp[j], "PATH=", 5) == 0)
+			return (envp[j] + 5);
 	}
 	return (NULL);
 }
 
-char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname)
+char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_argv_name)
 {
 	char	*path_buffer;
 	char	*cmd_buffer;
@@ -33,7 +33,7 @@ char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname)
 	while (*cut_cmd_paths_aux)
 	{
 		path_buffer = ft_strjoin(*cut_cmd_paths_aux, "/");
-		cmd_buffer = ft_strjoin(path_buffer, cmd_pathname);
+		cmd_buffer = ft_strjoin(path_buffer, cmd_argv_name);
 		free(path_buffer);
 		if (access(cmd_buffer, F_OK | X_OK) == 0)
 			return (cmd_buffer);
@@ -43,11 +43,6 @@ char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname)
 	return (NULL);
 }
 
-void	ppx_close_pipe(t_ppx *ppx)
-{
-	close(ppx->pipe_fd[1]);
-	close(ppx->pipe_fd[0]);
-}
 
 void	ppx_final_free(t_ppx *ppx)
 {

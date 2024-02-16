@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/14 15:12:07 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:30:18 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i)
 	}
 }
 
-void	bppx_collect_paths(char **envp, t_bnsppx *bppx)
+void	bppx_search_paths(char **envp, t_bnsppx *bppx)
 {
 	int	i;
 

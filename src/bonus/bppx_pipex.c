@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:34:43 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/14 15:12:02 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:31:28 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		bppx_exit_error(ERROR_ARG);
 	bppx_fd_handling(argc, argv, &bppx);
 	bppx_make_pipes(&bppx);
-	bppx_collect_paths(envp, &bppx);
+	bppx_search_paths(envp, &bppx);
 	bppx_cmds(envp, bppx, argv);
 	bppx_cut_pipes(&bppx);
 	waitpid(-1, NULL, 0);

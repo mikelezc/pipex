@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/14 15:45:15 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:18:37 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ typedef struct s_ppx
 //pipex (main)
 void	ppx_child_1(t_ppx ppx, char **argv, char **envp);
 void	ppx_child_2(t_ppx ppx, char **argv, char **envp);
-void	ppx_cmds(t_ppx ppx, char **argv, char **envp);
+void	ppx_prcs(t_ppx ppx, char **argv, char **envp);
 void	ppx_fd_handling(char **argv, t_ppx *ppx);
 
 //utils
 char	*ppx_search_paths(char **envp);
-char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_pathname);
-void	ppx_close_pipe(t_ppx *ppx);
+char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_argv_name);
 void	ppx_final_free(t_ppx *ppx);
 void	ppx_exit_error(char *err);
 
