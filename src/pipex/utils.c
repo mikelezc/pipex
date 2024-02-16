@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 19:00:53 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:03:49 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*ppx_search_paths(char **envp)
 	return (NULL);
 }
 
-
 char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_argv_name)
 {
 	char	*path_buffer;
@@ -43,7 +42,6 @@ char	*ppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_argv_name)
 	}
 	return (NULL);
 }
-
 
 void	ppx_final_free(t_ppx *ppx)
 {
