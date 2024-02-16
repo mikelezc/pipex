@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 13:37:17 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:56:26 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv)
 
 void	bppx_search_paths(char **envp, t_bnsppx *bppx)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	bppx->raw_cmd_paths = (envp[i] + 5);
+	j = 0;
+	while (ft_strncmp(envp[j], "PATH=", 5))
+		j++;
+	bppx->raw_cmd_paths = (envp[j] + 5);
 	bppx->cut_cmd_paths = ft_split(bppx->raw_cmd_paths, ':');
 	if (!bppx->cut_cmd_paths)
 		bppx_free_pipe(bppx);

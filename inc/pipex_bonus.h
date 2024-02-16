@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 12:57:15 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:52:17 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ int		bppx_valid_argc(char *argv, t_bnsppx *bppx);
 
 //bppx_fd_handling
 void	bppx_outfile_fd(char *outfile, t_bnsppx *bppx);
-void	bppx_here_doc(char *limiter);
 void	bppx_infile_fd(char **argv, t_bnsppx *bppx);
 void	bppx_fd_handling(int argc, char **argv, t_bnsppx *bppx);
+
+//bppx_fd_handling
+void	bppx_here_doc(char *limiter);
+int		bppx_here_doc_create_tmp(void);
 
 //bppx_cmds
 void	bppx_dup2(int std_in, int std_out);

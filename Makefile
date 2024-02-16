@@ -6,7 +6,7 @@
 #    By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 11:30:58 by mlezcano          #+#    #+#              #
-#    Updated: 2024/02/14 11:48:06 by mlezcano         ###   ########.fr        #
+#    Updated: 2024/02/16 18:26:46 by mlezcano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ BONUS_DIR	=	bonus/
 
 #src files
 PIP_FILES	=	pipex utils
-BONUS_FILES	=	bppx_pipex bppx_fd_handling bppx_ends bppx_cmds bppx_pipe
+BONUS_FILES	=	bppx_pipex bppx_fd_handling bppx_here_doc bppx_ends bppx_cmds bppx_pipe
 
 SRC_FILES	=	$(addprefix $(PIP_DIR), $(PIP_FILES))
 SRC_BFILES	=	$(addprefix $(BONUS_DIR), $(BONUS_FILES))
