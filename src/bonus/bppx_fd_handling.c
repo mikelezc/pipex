@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:05:33 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 13:27:11 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:35:55 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	bppx_fd_handling(int argc, char **argv, t_bnsppx *bppx)
 	bppx_infile_fd(argv, bppx);
 	bppx_outfile_fd(argv[argc - 1], bppx);
 	bppx->cmd_amnt = argc - 3 - bppx->here_doc;
-	bppx->pipe_ends_amnt = 2 * (bppx->cmd_amnt - 1);
+	bppx->pipe_ends_amnt = (bppx->cmd_amnt - 1) * 2;
 	bppx->pipe_ends_fd = (int *)malloc(sizeof(int) * bppx->pipe_ends_amnt);
 	if (!bppx->pipe_ends_fd)
 		bppx_exit_error(ERROR_PIP);

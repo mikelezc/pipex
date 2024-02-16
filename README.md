@@ -25,7 +25,8 @@ Estudio diferentes comandos de bash que se piden en el subject del bonus, ya que
 Veo la utilización de here_doc
 Sigo Avanzanzando en la función principal y empiezo a plantear como hacer el bonus
 
-
+- 16 febrero 
+Terminadas parte obligatoria y bonus a falta de revisarlo todo bien.
 
 
 

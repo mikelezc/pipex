@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 13:30:18 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:37:17 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i)
 	}
 }
 
+void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (++i < bppx.cmd_amnt)
+		bppx_born_child(bppx, argv, envp, i);
+}
+
 void	bppx_search_paths(char **envp, t_bnsppx *bppx)
 {
 	int	i;
@@ -71,13 +80,4 @@ void	bppx_search_paths(char **envp, t_bnsppx *bppx)
 	bppx->cut_cmd_paths = ft_split(bppx->raw_cmd_paths, ':');
 	if (!bppx->cut_cmd_paths)
 		bppx_free_pipe(bppx);
-}
-
-void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv)
-{
-	int	i;
-
-	i = -1;
-	while (++i < bppx.cmd_amnt)
-		bppx_born_child(bppx, argv, envp, i);
 }
