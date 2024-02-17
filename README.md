@@ -28,6 +28,8 @@ Sigo Avanzanzando en la función principal y empiezo a plantear como hacer el bo
 - 16 febrero 
 Terminadas parte obligatoria y bonus a falta de revisarlo todo bien.
 
+- 17 febrero
+Primera revisión concluida todo correcto.
 
 
 
