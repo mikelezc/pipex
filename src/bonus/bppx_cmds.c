@@ -6,51 +6,53 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/17 12:16:00 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:29:32 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-char	*bppx_polish_cmd(char **env_paths, char *cmd)
+char	*bppx_polish_cmd(char **cut_cmd_paths_aux, char *cmd_argv_name)
 {
-	char	*temp;
-	char	*command;
+	char	*path_buffer;
+	char	*cmd_buffer;
 
-	while (*env_paths)
+	while (*cut_cmd_paths_aux)
 	{
-		temp = ft_strjoin(*env_paths, "/");
-		command = ft_strjoin(temp, cmd);
-		free(temp);
-		if (access(command, F_OK | X_OK) == 0)
-			return (command);
-		free(command);
-		env_paths++;
+		path_buffer = ft_strjoin(*cut_cmd_paths_aux, "/");
+		cmd_buffer = ft_strjoin(path_buffer, cmd_argv_name);
+		free(path_buffer);
+		if (access(cmd_buffer, F_OK | X_OK) == 0)
+			return (cmd_buffer);
+		free(cmd_buffer);
+		cut_cmd_paths_aux++;
 	}
 	return (NULL);
-}
-
-void	bppx_dup2(int std_in, int std_out)
-{
-	dup2 (std_in, STDIN_FILENO);
-	dup2 (std_out, STDOUT_FILENO);
 }
 
 void	bppx_born_child(char **argv, char **envp, t_bnsppx bppx, int i)
 {
 	if (i == 0)
-		bppx_dup2(bppx.infile_fd, bppx.pipe_ends_fd[1]);
+	{
+		dup2 (bppx.infile_fd, STDIN_FILENO);
+		dup2 (bppx.pipe_ends_fd[1], STDOUT_FILENO);
+	}
 	else if (i == bppx.cmd_amnt - 1)
-		bppx_dup2(bppx.pipe_ends_fd[2 * i - 2], bppx.outfile_fd);
+	{
+		dup2 (bppx.pipe_ends_fd[(i * 2) - 2], STDIN_FILENO);
+		dup2 (bppx.outfile_fd, STDOUT_FILENO);
+	}
 	else
-		bppx_dup2(bppx.pipe_ends_fd[2 * i - 2],
-			bppx.pipe_ends_fd[2 * i + 1]);
+	{
+		dup2 (bppx.pipe_ends_fd[(i * 2) - 2], STDIN_FILENO);
+		dup2 (bppx.pipe_ends_fd[(i * 2) + 1], STDOUT_FILENO);
+	}
 	bppx_cut_pipes(&bppx);
 	bppx.cmd_args = ft_split(argv[2 + bppx.here_doc + i], ' ');
 	bppx.cmd = bppx_polish_cmd(bppx.cut_cmd_paths, bppx.cmd_args[0]);
 	if (!bppx.cmd)
 		bppx_free_child(&bppx);
-	if (execve(bppx.cmd, bppx.cmd_args, envp) == -1)
+	if (execve(bppx.cmd, bppx.cmd_args, envp) <= -1)
 		bppx_exit_error(ERROR_EXE);
 }
 
