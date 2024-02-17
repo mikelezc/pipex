@@ -6,13 +6,13 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 19:01:06 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:04:33 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
+void	ppx_born_child_1(t_ppx ppx, char **argv, char **envp)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ void	ppx_child_1(t_ppx ppx, char **argv, char **envp)
 		ppx_exit_error(ERROR_EXE);
 }
 
-void	ppx_child_2(t_ppx ppx, char **argv, char **envp)
+void	ppx_born_child_2(t_ppx ppx, char **argv, char **envp)
 {
 	int	i;
 
@@ -62,12 +62,12 @@ void	ppx_prcs(t_ppx ppx, char **argv, char **envp)
 	if (ppx.child_1_pid <= -1)
 		ppx_exit_error(ERROR_FRK);
 	else if (ppx.child_1_pid == 0)
-		ppx_child_1(ppx, argv, envp);
+		ppx_born_child_1(ppx, argv, envp);
 	ppx.child_2_pid = fork();
 	if (ppx.child_2_pid <= -1)
 		ppx_exit_error(ERROR_FRK);
 	else if (ppx.child_2_pid == 0)
-		ppx_child_2(ppx, argv, envp);
+		ppx_born_child_2(ppx, argv, envp);
 }
 
 void	ppx_fd_handling(char **argv, t_ppx *ppx)

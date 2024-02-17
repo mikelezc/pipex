@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:20:25 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 18:52:17 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:54:19 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int		bppx_here_doc_create_tmp(void);
 //bppx_cmds
 void	bppx_dup2(int std_in, int std_out);
 char	*bppx_polish_cmd(char **env_paths, char *cmd);
-void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i);
+void	bppx_born_child(char **argv, char **envp, t_bnsppx bppx, int i);
 void	bppx_search_paths(char **envp, t_bnsppx *bppx);
-void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv);
+void	bppx_cmds(char **argv, char **envp, t_bnsppx bppx);
 
 //bppx_pipe
 void	bppx_make_pipes(t_bnsppx *bppx);

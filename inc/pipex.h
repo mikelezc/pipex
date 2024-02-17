@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:37:10 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 19:00:36 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:04:24 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_ppx
 }	t_ppx;
 
 //pipex (main)
-void	ppx_child_1(t_ppx ppx, char **argv, char **envp);
-void	ppx_child_2(t_ppx ppx, char **argv, char **envp);
+void	ppx_born_child_1(t_ppx ppx, char **argv, char **envp);
+void	ppx_born_child_2(t_ppx ppx, char **argv, char **envp);
 void	ppx_prcs(t_ppx ppx, char **argv, char **envp);
 void	ppx_fd_handling(char **argv, t_ppx *ppx);
 

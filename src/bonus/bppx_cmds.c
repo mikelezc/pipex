@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:48:12 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/16 18:56:26 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:16:00 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,37 +36,37 @@ void	bppx_dup2(int std_in, int std_out)
 	dup2 (std_out, STDOUT_FILENO);
 }
 
-void	bppx_born_child(t_bnsppx bppx, char **argv, char **envp, int i)
+void	bppx_born_child(char **argv, char **envp, t_bnsppx bppx, int i)
 {
-	bppx.pid = fork();
-	if (bppx.pid < 0)
-		bppx_exit_error(ERROR_FRK);
-	else if (!bppx.pid)
-	{
-		if (i == 0)
-			bppx_dup2(bppx.infile_fd, bppx.pipe_ends_fd[1]);
-		else if (i == bppx.cmd_amnt - 1)
-			bppx_dup2(bppx.pipe_ends_fd[2 * i - 2], bppx.outfile_fd);
-		else
-			bppx_dup2(bppx.pipe_ends_fd[2 * i - 2],
-				bppx.pipe_ends_fd[2 * i + 1]);
-		bppx_cut_pipes(&bppx);
-		bppx.cmd_args = ft_split(argv[2 + bppx.here_doc + i], ' ');
-		bppx.cmd = bppx_polish_cmd(bppx.cut_cmd_paths, bppx.cmd_args[0]);
-		if (!bppx.cmd)
-			bppx_free_child(&bppx);
-		if (execve(bppx.cmd, bppx.cmd_args, envp) == -1)
-			bppx_exit_error(ERROR_EXE);
-	}
+	if (i == 0)
+		bppx_dup2(bppx.infile_fd, bppx.pipe_ends_fd[1]);
+	else if (i == bppx.cmd_amnt - 1)
+		bppx_dup2(bppx.pipe_ends_fd[2 * i - 2], bppx.outfile_fd);
+	else
+		bppx_dup2(bppx.pipe_ends_fd[2 * i - 2],
+			bppx.pipe_ends_fd[2 * i + 1]);
+	bppx_cut_pipes(&bppx);
+	bppx.cmd_args = ft_split(argv[2 + bppx.here_doc + i], ' ');
+	bppx.cmd = bppx_polish_cmd(bppx.cut_cmd_paths, bppx.cmd_args[0]);
+	if (!bppx.cmd)
+		bppx_free_child(&bppx);
+	if (execve(bppx.cmd, bppx.cmd_args, envp) == -1)
+		bppx_exit_error(ERROR_EXE);
 }
 
-void	bppx_cmds(char **envp, t_bnsppx bppx, char **argv)
+void	bppx_cmds(char **argv, char **envp, t_bnsppx bppx)
 {
 	int	i;
 
 	i = -1;
 	while (++i < bppx.cmd_amnt)
-		bppx_born_child(bppx, argv, envp, i);
+	{
+		bppx.pid = fork();
+		if (bppx.pid <= -1)
+			bppx_exit_error(ERROR_FRK);
+		else if (bppx.pid == 0)
+			bppx_born_child(argv, envp, bppx, i);
+	}
 }
 
 void	bppx_search_paths(char **envp, t_bnsppx *bppx)
