@@ -42,25 +42,25 @@ Tests
 
 
 5.	Este comando toma el contenido de infile.txt, 
-	"grep Now" para filtrar líneas que contienen "Now", 
+	"grep mike" para filtrar líneas que contienen "Now", 
 	"head -2" toma las dos primeras líneas de la salida filtrada. 
 	El resultado se escribe en outfile.txt.
 	
-	./pipex infile.txt "grep Now" "head -2" "outfile.txt"
-	< infile.txt grep Now | head -2
+	./pipex infile.txt "grep mike" "head -2" "outfile.txt"
+	< infile.txt grep mike | head -2
 
 
 6.	Este comando toma el contenido de infile.txt, 
-	"grep Now" para filtrar líneas que contienen "Now", 
+	"grep mike" para filtrar líneas que contienen "mike", 
 	pasa la salida al comando cat. 
 	El resultado se escribe en outfile.txt.
 
-	./pipex infile.txt "grep Now" "cat" "outfile.txt"
-	< infile.txt grep Now | cat
+	./pipex infile.txt "grep mike" "cat" "outfile.txt"
+	< infile.txt grep mike | cat
 
 
 7.	Este comando toma el contenido del archivo infile.txt, 
-	"grep Now" filtra las líneas que contienen "Now", 
+	"grep mike" filtra las líneas que contienen "mike", 
 	pasa esa salida a cat,
 	"$which cat" es equivalente a simplemente usar cat.
 	La razón de usar $(which cat) es para especificar explícitamente,
@@ -68,8 +68,8 @@ Tests
 	de la configuración del entorno del sistema en caso de necesitarlo.
 	El resultado se escribe en outfile.txt.
 
-	./pipex infile.txt "grep Now" "$which cat" "outfile.txt"
-	< infile.txt grep Now | $(which cat)
+	./pipex infile.txt "grep mike" "$which cat" "outfile.txt"
+	< infile.txt grep mike | $(which cat)
 
 
 BONUS
