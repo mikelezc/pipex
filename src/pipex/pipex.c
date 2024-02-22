@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 12:23:34 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/17 12:04:33 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/19 11:43:18 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ void	ppx_fd_handling(char **argv, t_ppx *ppx)
 		ppx_exit_error(ERROR_OUT);
 }
 
+void	leaks(void)
+{
+	system("leaks pipex");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_ppx	ppx;
@@ -97,5 +102,6 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(ppx.child_1_pid, NULL, 0);
 	waitpid(ppx.child_2_pid, NULL, 0);
 	ppx_final_free(&ppx);
+	atexit(leaks);
 	return (0);
 }

@@ -29,7 +29,13 @@ Sigo Avanzanzando en la función principal y empiezo a plantear como hacer el bo
 Terminadas parte obligatoria y bonus a falta de revisarlo todo bien.
 
 - 17 febrero
-Primera revisión concluida todo correcto.
+Revisión concluida, todo parece estar correcto.
+
+- 18 febrero
+Comienzo proceso de corrección.
+
+- 21 febrero
+Proyecto entregado con bonus: 125 "poins".
 
 
 

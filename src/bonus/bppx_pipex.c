@@ -6,7 +6,7 @@
 /*   By: mlezcano <mlezcano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:34:43 by mlezcano          #+#    #+#             */
-/*   Updated: 2024/02/17 11:52:30 by mlezcano         ###   ########.fr       */
+/*   Updated: 2024/02/18 17:17:02 by mlezcano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	bppx_valid_argc(char *argv, t_bnsppx *bppx)
 void	leaks(void)
 {
 	system("leaks pipex_bonus");
-	
 }
 
 int	main(int argc, char **argv, char **envp)
