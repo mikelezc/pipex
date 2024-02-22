@@ -18,24 +18,27 @@ Concluyendo que , al menos en la parte no bonus, necesitaré: dup2, fork, pipe, 
 Hago apuntes en la pizarra y elaboro una lista de vídeos en youtube con los nuevos conceptos aprendidos.
 
 - 9 febrero de 2024.
-Avanzando con el código, realizo algunas pruebas.
+Estos días sigo avanzando con el código, realizando pruebas.
 
 - 10 febrero de 2024
-Estudio diferentes comandos de bash que se piden en el subject del bonus, ya que mi intención es hacerlo con bonus.
-Veo la utilización de here_doc
-Sigo Avanzanzando en la función principal y empiezo a plantear como hacer el bonus
+Estudio comandos de bash que se piden en el subject del bonus, ya que mi intención es hacerlo con bonus.
+Básicamente veo la utilización y funcionamiento de here_doc
+Sigo avanzanzando en la parte obligatoria y empiezo a plantear el bonus (como hacerlo a partir de lo que voy teniendo).
 
 - 16 febrero 
-Terminadas parte obligatoria y bonus a falta de revisarlo todo bien.
+Termino el proyecto a falta de revisarlo todo bien.
 
 - 17 febrero
 Revisión concluida, todo parece estar correcto.
+Sin embargo, hay algunas cosas con las que discrepo respecto al subject ya que parecen ser un poco ambiguas.
+He deecidido atajar para que no me pase como con el push_swap que al final por contemplar posibles putadas por
+parte del corrector, me quedaron algunas partes, aunque bien protegidas, demasiado sobrepensadas.
 
 - 18 febrero
-Comienzo proceso de corrección.
+Comienzo proceso de corrección estos días y sigo practicando algunos comandos más de Unix.
 
 - 21 febrero
-Proyecto entregado con bonus: 125 "poins".
+Proyecto entregado con bonus: 125 "poins"!
 
 
 
