@@ -28,7 +28,7 @@ Sigo avanzanzando en la parte obligatoria y empiezo a plantear el bonus (como ha
 - 17 febrero
 Revisión final concluida, todo parece estar correcto.
 Sin embargo, hay algunas cosas con las que discrepo respecto al subject ya que parecen ser un poco ambiguas.
-He deecidido atajar para que no me pase como con el push_swap que al final por contemplar posibles putadas por
+He decidido atajar para que no me pase como con el push_swap que al final por contemplar posibles putadas por
 parte del corrector, me quedaron algunas partes, aunque bien protegidas, demasiado sobrepensadas.
 
 - 18 febrero
