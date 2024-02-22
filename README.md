@@ -25,11 +25,8 @@ Estudio comandos de bash que se piden en el subject del bonus, ya que mi intenci
 Básicamente veo la utilización y funcionamiento de here_doc
 Sigo avanzanzando en la parte obligatoria y empiezo a plantear el bonus (como hacerlo a partir de lo que voy teniendo).
 
-- 16 febrero 
-Termino el proyecto a falta de revisarlo todo bien.
-
 - 17 febrero
-Revisión concluida, todo parece estar correcto.
+Revisión final concluida, todo parece estar correcto.
 Sin embargo, hay algunas cosas con las que discrepo respecto al subject ya que parecen ser un poco ambiguas.
 He deecidido atajar para que no me pase como con el push_swap que al final por contemplar posibles putadas por
 parte del corrector, me quedaron algunas partes, aunque bien protegidas, demasiado sobrepensadas.
