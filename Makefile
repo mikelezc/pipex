@@ -96,7 +96,7 @@ $(OBJF):
 clean:
 			@$(RM) -r $(OBJ_DIR)
 			@make clean -C $(LIBFT)
-			@$(ECHO) -n "$(RED)[push_swap]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(RED)[pipex]:\tobject files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 			@$(RM) $(OBJF)
 
 fclean:		clean
@@ -107,7 +107,7 @@ fclean:		clean
 			@rm -rf *.dSYM
 			@find . -name ".DS_Store" -delete
 			@$(ECHO) -n "$(RED)[LIBFT]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
-			@$(ECHO) -n "$(RED)[push_swap]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(RED)[pipex]:\texec. files$(DEF_COLOR)$(YELLOW)  => Clean! 🚽$(DEF_COLOR)\n"
 
 
 re:			fclean all
